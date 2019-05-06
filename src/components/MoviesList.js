@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { fetchMoviesAll } from '../api/FetchData'
+import logo from '../assets/images/Star_Wars_Logo.png';
 class MoviesList extends Component {
     constructor(props){
         super(props)
@@ -10,24 +11,27 @@ class MoviesList extends Component {
         }
     }
     componentDidMount(){
-        return fetchMoviesAll()
+        this.setState({ isLoading: true });
+        fetchMoviesAll()
         .then((data => this.setState({
-            allMovies : data
-        })
-        ))
+            allMovies : data,
+            isLoading : false
+        })))
     }
     render(){
         return(
-            <div className="col-xs-12">
-                    { this.state.allMovies.map((movie) => (
-                        <div className="card" 
+            <div className="row">
+                    { this.state.allMovies.map((movie, index) => (
+                        <div className="col-md-3" 
                             key={movie.episode_id}
                         >
                             <div className="card-body">
-                                <h5 className="card-title">{movie.episode_id}</h5>
-                                {/* <Link to={{pathname:"/"+movie.episode_id, data:movie}}> */}
-                                    <h6 className="card-subtitle mb-2 text-muted">{movie.title}</h6>
-                                {/* </Link> */}
+                                <Link to={{pathname:"/"+index, data:movie}} style={{textDecorationLine: 'none'}}>
+                                    <div className="card">
+                                        <img src={logo} alt="logo" style={{width:'100%'}} />
+                                        <h5 className="card-subtitle mb-2 text-muted" style={{display: 'flex',  justifyContent:'center', alignItems:'center', padding: '20px'}}>Episode {movie.episode_id} : {movie.title}</h5>
+                                    </div>
+                                </Link>
                             </div>
                         </div>
                     ))}

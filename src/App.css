@@ -9,18 +9,36 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-image: url('../src/assets/images/background.jpg');
+  min-height: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(50px + 2vmin);
   color: white;
+}
+
+@font-face {
+  font-family: "myFirstFont";
+  src: url('../src/assets/fonts/STARWARS/STARWARS.TTF');
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.card-body {
+  background: beige;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.card {
+  border-radius: 2px;
+  background-color: #FFF;
+  overflow: hidden;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.14), 0 2px 2px 0 rgba(0,0,0,.098), 0 1px 5px 0 rgba(0,0,0,.084);
 }
 
 @keyframes App-logo-spin {
