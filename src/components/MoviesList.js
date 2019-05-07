@@ -19,6 +19,11 @@ class MoviesList extends Component {
         })))
     }
     render(){
+        this.state.allMovies.sort(function(a,b){
+            var eps_a = a.episode_id;
+            var eps_b = b.episode_id;
+            return (eps_a < eps_b) ? -1 : (eps_a > eps_b) ? 1 : 0;
+        });
         return(
             <div className="row">
                     { this.state.allMovies.map((movie, index) => (
@@ -26,7 +31,7 @@ class MoviesList extends Component {
                             key={movie.episode_id}
                         >
                             <div className="card-body">
-                                <Link to={{pathname:"/"+index, data:movie}} style={{textDecorationLine: 'none'}}>
+                                <Link to={{pathname:"/"+movie.episode_id, data:movie}} style={{textDecorationLine: 'none'}}>
                                     <div className="card">
                                         <img src={logo} alt="logo" style={{width:'100%'}} />
                                         <h5 className="card-subtitle mb-2 text-muted" style={{display: 'flex',  justifyContent:'center', alignItems:'center', padding: '20px'}}>Episode {movie.episode_id} : {movie.title}</h5>

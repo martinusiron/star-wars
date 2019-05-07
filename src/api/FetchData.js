@@ -24,6 +24,51 @@ export function fetchMovieDetail(id){
     .then(response => response.json())
     .then(data => data)
     .catch((error)=>{
-      console.log ("Error in fetchMoviesAll " + error);
+      console.log ("Error in fetchMovieDetail " + error);
     })
+}
+
+export function fetchCharacters(url){
+  return fetch(url)
+  .then(response => response.json())
+  .then(data => data)
+  .catch((error)=>{
+    console.log ("Error in fetchCharacters " + error);
+  })
+}
+
+export function fetchPlanets(url){
+  return fetch(url)
+  .then(response => response.json())
+  .then(data => data)
+  .catch((error)=>{
+    console.log ("Error in fetchPlanets " + error);
+  })
+}
+
+export function fetchStarships(url){
+  return fetch(url)
+  .then(response => response.json())
+  .then(data => data)
+  .catch((error)=>{
+    console.log ("Error in fetchStarships " + error);
+  })
+}
+
+export function fetchVehicles(url){
+  return fetch(url)
+  .then(response => response.json())
+  .then(data => data)
+  .catch((error)=>{
+    console.log ("Error in fetchVehicles " + error);
+  })
+}
+
+export function fetchSpecies(url){
+  return fetch(url)
+  .then(response => response.json())
+  .then(data => data)
+  .catch((error)=>{
+    console.log ("Error in fetchSpecies " + error);
+  })
 }
