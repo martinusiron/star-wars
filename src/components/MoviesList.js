@@ -36,7 +36,7 @@ class MoviesList extends Component {
                         key={movie.episode_id}
                     >
                         <div className="card-body">
-                            <Link to={{pathname:"films/"+index}} style={{textDecorationLine: 'none'}}>
+                            <Link to={{pathname:"films/"+movie.url.replace(/\D/g,"")}} style={{textDecorationLine: 'none'}}>
                                 <div className="card">
                                     <img src={logo} alt="logo" style={{width:'100%'}} />
                                     <h5 className="card-subtitle mb-2 text-muted" style={{display: 'flex',  justifyContent:'center', alignItems:'center', padding: '20px'}}>Episode {movie.episode_id} : {movie.title}</h5>

@@ -8,7 +8,7 @@ class Planet extends Component {
             planet: []
         }
     }
-    componentWillMount(){
+    componentDidMount(){
         fetchData(this.props.value)
         .then(data => this.setState({
             planet : data
