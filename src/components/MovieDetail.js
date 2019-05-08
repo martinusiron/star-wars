@@ -1,33 +1,43 @@
 import React, {Component} from 'react'
 import { fetchMovieDetail } from '../api/FetchData';
 import logo from '../assets/images/Star_Wars_Logo.png';
+import Characters from './Characters';
+import Planets from './Planets';
+import Vehicles from './Vehicles';
+import Starships from './Starships';
+import Species from './Species'
 
 class MovieDetail extends Component {
     constructor(props){
         super(props)
         this.state = {
-            movieDetail : []
+            movieDetail : [],
+            characters : [],
+            planets : [],
+            vehicles: [],
+            starships: [],
+            species : []
         }
-        this.items = 0
     }
     componentDidMount(){
         const handle= this.props.match.params.id;
-        // console.log(this.props.location.data.url)
+        console.log(this.props)
         fetchMovieDetail(handle)
         .then((data => this.setState({
-            movieDetail: data
+            movieDetail: data,
+            characters : data.characters,
+            planets : data.planets,
+            vehicles : data.vehicles,
+            starships : data.starships,
+            species: data.species
         })))
     }
     render(){
-        const items =this.state.movieDetail.characters 
-        console.log(items)
-        // this.state.movieDetail.characters.map(item => (
-        //     console.log(item)
-        // ))
+        
         return(
             <div className="container">
                 <div className="row card" style={{marginTop: '40px'}}>
-                <div className="col-md-4">
+                    <div className="col-md-4">
                         <img src={logo} style={{width:'100%'}} />
                     </div>
                     <div className="col-md-8">
@@ -38,35 +48,42 @@ class MovieDetail extends Component {
                         <h5>Opening Crawl: {this.state.movieDetail.opening_crawl}</h5>
                     </div>
                 </div>
-                <div className="row card">
+                <div className="row card" style={{marginBottom: '40px'}}>
                     <div className="col-md-4">
                         <h3>Related Characters</h3>
                         <hr/>
-                        
-                        {this.state.movieDetail.characters}
-                        {/* { this.state.movieDetail.characters.map((character, index) => (
-                            <h6>{character[index]}</h6>
-                        ))} */}
+                        { this.state.characters.map((character, index) => (
+                            <Characters value={character} key={index} />
+                        ))}
+                        <hr />
                     </div>
                     <div className="col-md-4">
                         <h3>Related Planets</h3>   
                         <hr/>
-                        {this.state.movieDetail.planets} 
+                        { this.state.planets.map((planet, index) => (
+                            <Planets value={planet} key={index} />
+                        ))}
                     </div>
                     <div className="col-md-4">
                         <h3>Related Vehicles</h3>   
                         <hr/>
-                        {this.state.movieDetail.vehicles} 
+                        { this.state.vehicles.map((vehicle, index) => (
+                            <Vehicles value={vehicle} key={index} />
+                        ))}
                     </div>
                     <div className="col-md-4">
                         <h3>Related Starships</h3>   
                         <hr/>
-                        {this.state.movieDetail.starships} 
+                        { this.state.starships.map((starship, index) => (
+                            <Starships value={starship} key={index} />
+                        ))}
                     </div>
                     <div className="col-md-4">
                         <h3>Related Species</h3>   
                         <hr/>
-                        {this.state.movieDetail.species} 
+                        { this.state.species.map((specie, index) => (
+                            <Species value={specie} key={index} />
+                        ))}
                     </div>
                 </div>
             </div>
