@@ -1,22 +1,35 @@
 import React, {Component} from 'react'
-import {fetchSpecies} from '../api/FetchData'
+import {fetchData} from '../api/FetchData'
+import Specie from './Specie';
 class Species extends Component {
     constructor(props){
         super(props)
         this.state = {
-            specie : []
+            specie : [],
+            isHidden: false
         }
+        this.toggleHidden = this.toggleHidden.bind(this)
     }
-
+    toggleHidden(e) {
+        e.preventDefault();
+        const {isHidden} = this.state;
+        this.setState({
+            isHidden : !isHidden
+        })
+    }
     componentDidMount(){
-        fetchSpecies(this.props.value)
+        fetchData(this.props.value)
         .then((data => this.setState({
             specie : data
         })))
     }
     render(){
+        const {isHidden, specie} = this.state
         return(
-            <h6>{this.state.specie.name}</h6>
+            <div>
+                <h6 onClick={this.toggleHidden} value={specie.url}><a href="#">{specie.name}</a></h6>
+                { isHidden  && <Specie value={specie.url} /> }
+            </div>
         )
     }
 }

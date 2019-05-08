@@ -1,22 +1,35 @@
 import React, {Component} from 'react'
-import {fetchPlanets} from '../api/FetchData'
+import {fetchData} from '../api/FetchData'
+import Planet from './Planet';
 class Planets extends Component {
     constructor(props){
         super(props)
         this.state = {
-            planet : []
+            planet : [],
+            isHidden: false
         }
+        this.toggleHidden = this.toggleHidden.bind(this)
     }
-
+    toggleHidden(e) {
+        e.preventDefault();
+        const {isHidden} = this.state;
+        this.setState({
+            isHidden : !isHidden
+        })
+    }
     componentDidMount(){
-        fetchPlanets(this.props.value)
+        fetchData(this.props.value)
         .then((data => this.setState({
             planet : data
         })))
     }
     render(){
+        const {planet, isHidden} = this.state
         return(
-            <h6>{this.state.planet.name}</h6>
+            <div>
+                <h6 onClick={this.toggleHidden} value={planet.url}><a href="#">{planet.name}</a></h6>
+                { isHidden  && <Planet value={planet.url} /> }
+            </div>
         )
     }
 }

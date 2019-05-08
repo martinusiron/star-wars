@@ -1,23 +1,35 @@
 import React, {Component} from 'react'
-import {fetchStarships} from '../api/FetchData'
-
+import {fetchData} from '../api/FetchData'
+import Starship from './Starship'
 class Starships extends Component {
     constructor(props){
         super(props)
         this.state = {
-            starship : []
+            starship : [],
+            isHidden : false
         }
+        this.toggleHidden = this.toggleHidden.bind(this)
     }
-
+    toggleHidden(e) {
+        e.preventDefault();
+        const {isHidden} = this.state;
+        this.setState({
+            isHidden : !isHidden
+        })
+    }
     componentDidMount(){
-        fetchStarships(this.props.value)
+        fetchData(this.props.value)
         .then((data => this.setState({
             starship : data
         })))
     }
     render(){
+        const {isHidden, starship} = this.state
         return(
-            <h6>{this.state.starship.name}</h6>
+            <div>
+                <h6 onClick={this.toggleHidden} value={starship.url}><a href="#">{starship.name}</a></h6>
+                { isHidden  && <Starship value={starship.url} /> }
+            </div>
         )
     }
 }

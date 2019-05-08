@@ -1,23 +1,33 @@
 import React, {Component} from 'react'
-import {fetchVehicles} from '../api/FetchData'
+import {fetchData} from '../api/FetchData'
+import Vehicle from './Vehicle';
 class Vehicles extends Component {
     constructor(props){
         super(props)
         this.state = {
-            vehicle : []
+            vehicle : [],
+            isHidden : false
         }
-        this.id = 1;
+        this.toggleHidden = this.toggleHidden.bind(this)
     }
-
+    toggleHidden() {
+        this.setState(prevState => ({
+            isHidden : !prevState.isHidden
+        }))
+    }
     componentDidMount(){
-        fetchVehicles(this.props.value)
+        fetchData(this.props.value)
         .then((data => this.setState({
             vehicle : data
         })))
     }
     render(){
+        const {isHidden, vehicle} = this.state
         return(
-            <h6>{this.state.vehicle.name}</h6>
+            <div>
+                <h6 onClick={this.toggleHidden} value={vehicle.url}><a href="#">{vehicle.name}</a></h6>
+                { isHidden  && <Vehicle value={vehicle.url} /> }
+            </div>
         )
     }
 }

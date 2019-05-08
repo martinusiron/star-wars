@@ -28,48 +28,11 @@ export function fetchMovieDetail(id){
     })
 }
 
-export function fetchCharacters(url){
-  console.log(url)
+export function fetchData(url){
   return fetch(url)
   .then(response => response.json())
   .then(data => data)
   .catch((error)=>{
-    console.log ("Error in fetchCharacters " + error);
-  })
-}
-
-export function fetchPlanets(url){
-  return fetch(url)
-  .then(response => response.json())
-  .then(data => data)
-  .catch((error)=>{
-    console.log ("Error in fetchPlanets " + error);
-  })
-}
-
-export function fetchStarships(url){
-  return fetch(url)
-  .then(response => response.json())
-  .then(data => data)
-  .catch((error)=>{
-    console.log ("Error in fetchStarships " + error);
-  })
-}
-
-export function fetchVehicles(url){
-  return fetch(url)
-  .then(response => response.json())
-  .then(data => data)
-  .catch((error)=>{
-    console.log ("Error in fetchVehicles " + error);
-  })
-}
-
-export function fetchSpecies(url){
-  return fetch(url)
-  .then(response => response.json())
-  .then(data => data)
-  .catch((error)=>{
-    console.log ("Error in fetchSpecies " + error);
+    console.log ("Error in fetchData " + error);
   })
 }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import {fetchCharacters} from '../api/FetchData'
+import {fetchData} from '../api/FetchData'
+import People from './People'
 class Characters extends Component {
     constructor(props){
         super(props)
@@ -9,28 +10,27 @@ class Characters extends Component {
         }
         this.toggleHidden = this.toggleHidden.bind(this)
     }
-    toggleHidden() {
-        this.state.isHidden= false
+    toggleHidden(e) {
+        e.preventDefault();
+        const {isHidden} = this.state;
         this.setState({
-            isHidden : true
+            isHidden : !isHidden
         })
     }
     componentDidMount(){
-        fetchCharacters(this.props.value)
+        fetchData(this.props.value)
         .then((data => this.setState({
             character : data
         })))
     }
     render(){
         const {character, isHidden} = this.state;
-        // console.log(isHidden)
         return(
             <div>
-                <h6 onClick={this.toggleHidden} value={character.url}>{character.name}</h6>
-                { isHidden ? <h6>{character.name}</h6> : null }
+                <h6 onClick={this.toggleHidden} value={character.url}><a href="#">{character.name}</a></h6>
+                { isHidden  && <People value={character.url} /> }
             </div>
         )
     }
 }
-
 export default Characters
