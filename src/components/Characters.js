@@ -5,14 +5,14 @@ class Characters extends Component {
         super(props)
         this.state = {
             character : [],
-            isHidden: true
+            isHidden: false
         }
         this.toggleHidden = this.toggleHidden.bind(this)
     }
     toggleHidden() {
-        console.log(this.props)
+        this.state.isHidden= false
         this.setState({
-            isHidden : false
+            isHidden : true
         })
     }
     componentDidMount(){
